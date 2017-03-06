@@ -10,7 +10,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
+
 import com.alibaba.fastjson.JSON;
+
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -53,6 +55,9 @@ public class RedisTest {
 		private static Integer port = 6379;
 		
 		
+		/**
+		 * redis模板
+		 */
 		private RedisTemplate redisTemplate;
 		
 		
@@ -63,9 +68,11 @@ public class RedisTest {
 		public static Jedis getJedis(){
 			if(jedisPoolConfig == null){
 				jedisPoolConfig = new JedisPoolConfig();
-				jedisPoolConfig.setMaxActive(maxActive);
+				//jedisPoolConfig.setMaxActive(maxActive);
+				jedisPoolConfig.setMaxTotal(maxActive);
 				jedisPoolConfig.setMaxIdle(maxIdle);
-				jedisPoolConfig.setMaxWait(maxWait);
+				//jedisPoolConfig.setMaxWait(maxWait);
+				jedisPoolConfig.setMaxWaitMillis(maxWait);
 			}
 			JedisPool jedisPool= new JedisPool(jedisPoolConfig, hostIp, port);
 			jedis = jedisPool.getResource();
@@ -119,30 +126,30 @@ public class RedisTest {
 		
 		public static Object get(String key){
 			Jedis jedis = getJedis();
-			
 			return null;
 		}
 		
-		/*104      * 根据key 获取内容
-		105      *
-		106      * @param key
-		107      * @return
-		108      
-		109     public static Object get(String key) {
-		110 
-		111         Jedis jedis = null;
-		112         try {
-		113             jedis = jedisPool.getResource();
-		114             byte[] value = jedis.get(key.getBytes());
-		115             return SerializeUtil.unserialize(value);
-		116         } catch (Exception e) {
-		117             e.printStackTrace();
-		118             return false;
-		119         } finally {
-		120             jedisPool.returnResource(jedis);
-		121         }
-		122     }
-		*/
+		
+		/**
+		 * 根据key 获取内容
+		 * @param key
+		 * @return
+		 */
+	   /* public static Object get(String key) {
+	
+	         Jedis jedis = null;
+	         try {
+	             jedis = jedisPool.getResource();
+	            byte[] value = jedis.get(key.getBytes());
+	             return SerializeUtil.unserialize(value);
+	         } catch (Exception e) {
+	             e.printStackTrace();
+	             return false;
+	         } finally {
+	             jedisPool.returnResource(jedis);
+	         }
+	     }*/
+	
 		
 		
 		/**
