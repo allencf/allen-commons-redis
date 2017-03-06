@@ -10,15 +10,12 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
-
 import com.alibaba.fastjson.JSON;
-
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 public class RedisTest {
-
 
 		private static final Logger logger = LoggerFactory.getLogger(RedisTest.class);
 		
@@ -202,14 +199,17 @@ public class RedisTest {
 	    
 	    
 		public static void main(String[] args) {
-			Jedis jedis = getJedis();
-			//jedis.set("allen", "aaa");
+			for (int i = 0; i < 100; i++) {
+				Jedis jedis = getJedis();
+				//jedis.set("allen", "aaa");
+				
+				TestBean1 test = TestBean1.getInstance(i, "allen");
+				byte[] key   = getKey(String.valueOf(test.getId()));
+				byte[] value = JSON.toJSONString(test).getBytes();
+				
+				jedis.set(key, value);
+			}
 			
-			TestBean1 test = TestBean1.getInstance(12, "allen");
-			byte[] key   = getKey(String.valueOf(test.getId()));
-			byte[] value = JSON.toJSONString(test).getBytes();
-			
-			jedis.set(key, value);
 			logger.info("操作成功!!!");
 		}
 		
