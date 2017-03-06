@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeroid="60 senconds" debug="false">
 	
-	<substitutionProperty name="LOG_HOME" value="/data/logs/allen/dubbo-consumer-webapp" />
+	<substitutionProperty name="LOG_HOME" value="/data/logs/allen/allen-commons-redis" />
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
