@@ -12,7 +12,7 @@ import redis.clients.jedis.ShardedJedisPool;
 
 
 /**
- * RedisClient  操作 
+ * RedisClient操作 
  * All rights   Reserved, Designed By HQYG
  * Copyright:   Copyright(C) 2016
  * Company:     HQYG.
@@ -21,7 +21,7 @@ import redis.clients.jedis.ShardedJedisPool;
  */
 public class RedisClient implements Serializable {
 
-	//url http://www.tuicool.com/articles/vYVvQby
+	//url  http://www.tuicool.com/articles/vYVvQby
 	
 	private static final long serialVersionUID = 1357749867950858521L;
 	
@@ -74,7 +74,7 @@ public class RedisClient implements Serializable {
         config.setTestOnBorrow(false); 
         //slave链接 
         List<JedisShardInfo> shards = new ArrayList<>(); 
-        shards.add(new JedisShardInfo("127.0.0.1", 6379, "master")); 
+        shards.add(new JedisShardInfo("10.33.3.225", 6379, "master")); 
         //构造池 
         shardedJedisPool = new ShardedJedisPool(config, shards); 
 	}
